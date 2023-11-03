@@ -1,0 +1,126 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <limits.h>
+#define lmax 200
+
+int main()
+{
+    int n, m, i, j, k, z, f, ma, e;
+    int x, y, R[lmax][lmax], B[lmax];
+
+    printf("Daria Dusheiko, IVT, BIV237, v374\n");
+    printf("Laboratory work #2\n");
+    printf("\n");
+    printf("Task #1.1\n");
+
+    do
+    {
+        printf("Enter the number of rows and columns in the matrix from 1 to %d: ", lmax);
+        k = scanf("%d %d", &n, &m);
+        if(k == 2)
+        {
+            x = (int)n;
+            y = (int)m;
+        }
+        while(getchar() != '\n');
+    }
+    while (n <= 0 || n > lmax || m <= 0 || m > lmax || k != 2 || x != n || y != m || n > INT_MAX || m > INT_MAX);
+
+    printf("Enter the matrix: \n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            do
+            {
+                scanf("%d", &z);
+                x = (int)z;
+                while(getchar() != '\n');
+            }
+            while (x != z || z > INT_MAX);
+
+            R[i][j] = z;
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+     do
+    {
+        printf("Enter the lenght of array from 1 to %d: ", lmax);
+        scanf("%d", &k);
+        x = (int)k;
+        while(getchar() != '\n');
+    }
+    while (k <= 0 || k > lmax || x != k);
+
+    printf("Enter the array: \n");
+    for (i = 0; i < k; i ++)
+    {
+        do
+        {
+            scanf("%d", &z);
+            x = (int)z;
+            while(getchar() != '\n');
+        }
+        while (x != z || z > INT_MAX);
+        B[i] = z;
+    }
+    printf("\n");
+
+    printf("Source matrix:\n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            printf("%d ", R[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+    for (i = 0; i < n; i++)
+    {
+        ma = 0;
+        for (j = 0; j < m; j++)
+        {
+            if (ma < abs(R[i][j]))
+            {
+                ma = abs(R[i][j]);
+            }
+        }
+
+        for (j = 0; j < m; j++)
+        {
+            if (ma == abs(R[i][j]))
+            {
+                f = 0;
+                e = 0;
+                while (e < k && f == 0)
+                {
+                    if (B[e] == R[i][j])
+                    {
+                        f = 1;
+                    }
+                    e += 1;
+                }
+                if (f == 0)
+                    R[i][j] = 0;
+            }
+        }
+    }
+
+    printf("The final matrix:\n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            printf("%d ", R[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+    return 0;
+}
