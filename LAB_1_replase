@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define lmax 200
+int main()
+{
+int n, i;
+float x, a, h, R[lmax];
+printf("Daria Dusheiko, IVT, BIV237, v374\n");
+printf("Laboratory work #1\n");
+printf("\n");
+printf("Task #1.4\n");
+do
+{
+printf("Enter the array length from 1 to %d: ", lmax);
+scanf("%d", &n);
+}
+while (n <= 0 || n > lmax);
+printf("Enter x, h, a: ");
+scanf("%f %f %f", &x, &h, &a);
+for (int i = 1; i <= n; i++)
+{
