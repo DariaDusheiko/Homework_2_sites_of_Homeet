@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <limits.h>
+#define lmax 200
+
+int main()
+{
+    int n, m, i, po, z;
+    int x, R[lmax], B[lmax];
+
+    printf("Daria Dusheiko, IVT, BIV237, v374\n");
+    printf("Laboratory work #2\n");
+    printf("\n");
+    printf("Task #2.5\n");
+
+    do
+    {
+        printf("Enter the lenght of the array from 1 to %d: ", lmax);
+        scanf("%d", &n);
+        x = (int)n;
+        while(getchar() != '\n');
+    } while(n <= 0 || n > lmax || x != n);
+
+    printf("Enter the array:\n");
+    for (i = 0; i < n; i++)
+    {
+        do
+        {
+            scanf("%d", &m);
+            x = (int)m;
+            while(getchar() != '\n');
+        } while(m <= 0 || m > INT_MAX || x != m);
+        R[i] = m;
+    }
+    printf("\n");
+
+    printf("Source array:\n");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", R[i]);
+    }
+    printf("\n");
+
+    for (i = 0; i < n; i++)
+    {
+        po = R[i] % 10;
+        z = R[i];
+        while (z >= 10)
+        {
+            z = z / 10;
+        }
+        B[i] = z * po;
+    }
+    printf("\n");
+
+    printf("The final array:\n");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", B[i]);
+    }
+    printf("\n");
+
+
+    return 0;
+}
+
