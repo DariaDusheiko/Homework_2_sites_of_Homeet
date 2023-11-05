@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <limits.h>
+#define lmax 200
+
+void Enter(float B[], int *n, int *m)
+{
+    int k;
+    float v, *i, *j;
+    do
+    {
+        printf("Enter the number of rows and columns in the matrix from 1 to %d: ", lmax);
+        k = scanf("%d %d", n, m);
+        while(getchar() != '\n');
+    }
+    while (*n <= 0 || *n > lmax || *m <= 0 || *m > lmax || k != 2);
+
+    printf("\nEnter the matrix: \n");
+    for (i = B; i < B + *n * lmax; i += lmax)
+    {
+
+        for (j = i; j < *m + i; j++)
+        {
+            do
+            {
+                scanf("%f", &v);
+            }
+            while (getchar() != '\n');
+            *j = v;
+        }
+        printf("\n");
+    }
+}
+
+void output(float B[], int *n, int *m)
+{
+    printf("\nThe matrix: \n");
+
+    float *i, *j;
+    for (i = B; i < B + *n * lmax; i += lmax)
+    {
+        for (j = i; j < *m + i; j++)
+            printf("%10.3f", *j);
+        printf("\n");
+    }
+}
+
+float maxi_mini(float B[], int *n, int *m)
+{
+    float *i, *j, maxi, mini;
+    mini = 100000000000000;
+    for (i = B; i < B + *n * lmax; i += lmax)
+        {
+        maxi = -100000000000000;
+        for (j = i; j < *m + i; j++)
+        {
+            if (*j > maxi)
+                maxi = *j;
+        }
+        if (mini > maxi)
+            mini = maxi;
+    }
+    return mini;
+}
+
+
+int main()
+{
+    float B[lmax][lmax];
+    int n, m;
+
+    printf("Daria Dusheiko, IVT, BIV237, v374\n");
+    printf("Laboratory work #3\n");
+    printf("Task #2.6\n\n");
+
+    Enter(B, &n, &m);
+    output(B, &n, &m);
+    printf("\nMIN MAX = %f", maxi_mini(B, &n, &m));
+
+    return 0;
+}
