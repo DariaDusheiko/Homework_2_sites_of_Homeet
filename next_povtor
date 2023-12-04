@@ -1,0 +1,140 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <limits.h>
+#define lmax 200
+
+void Enter(int B[], int *n)
+{
+    int v, *i;
+    float k;
+    do
+    {
+        printf("Enter the lenght of the array from 2 to %d: ", lmax);
+        scanf("%f", &k);
+        *n = (int)k;
+        while(getchar() != '\n');
+    }
+    while (*n <= 1 || *n > lmax || *n != k);
+
+    printf("\nEnter the array: \n");
+
+    for (i = B; i < B + *n; i++)
+    {
+        do
+        {
+            scanf("%d", &v);
+            *i = (int)v;
+        }
+        while (getchar() != '\n' || *i != v);
+    }
+}
+
+void output(int B[], int n)
+{
+    printf("\nThe array: \n");
+
+    int *i;
+    for (i = B; i < B + n; i++)
+    {
+        printf("%d ", *i);
+    }
+}
+
+void cout_elements(int B[], int n, int R[lmax][2])
+{
+    int *i, k = 0;
+    int *fin = R[0] + lmax * 2 - 1;
+
+    for (int *a = R; a < fin; a ++)
+    {
+        *a = 0;
+    }
+
+    for (i = B; i < B + n; i++)
+    {
+        for (int *t = R; t < fin; t += 2)
+        {
+            if (*t == *i)
+            {
+                *(t + 1) += 1;
+                break;
+            }
+            else if (*t == 0 && *(t + 1) == 0)
+            {
+                *t = *i;
+                *(t + 1) += 1;
+                break;
+            }
+        }
+    }
+    printf("\n");
+
+    for (int *z = R; z < fin; z += 2)
+    {
+        if (*(z + 1) != 0)
+        {
+            printf("\nThe element %d repeated %d times.\n", *z, *(z + 1));
+        }
+        else
+            break;
+    }
+
+}
+
+void delete_only(int B[], int *n, int R[lmax][2])
+{
+    int *i = B, v = *n;
+    int *fin = R[0] + lmax * 2 - 1;
+
+    while (i < B + *n)
+    {
+        int k = 0, need = 0;
+        for (int *e = R; e < fin; e += 2)
+        {
+            if (*i == *e)
+            {
+                if (*(e + 1) != 1)
+                    k = 1;
+                break;
+            }
+        }
+        if (k == 0)
+        {
+            v -= 1;
+            int g = 0;
+            while (g + i < n)
+            {
+                *(i + g) = *(i + g + 1);
+                g++;
+            }
+        }
+        else
+            i++;
+        *n = v;
+    }
+}
+
+
+int main()
+{
+    int n, B[lmax], R[lmax][2];
+
+    printf("Daria Dusheiko, IVT, BIV237, v374\n");
+    printf("Laboratory work #3\n");
+    printf("Task #3.4\n\n");
+
+    Enter(B, &n);
+    output(B, n);
+    cout_elements(B, n, R);
+    delete_only(B, &n, R);
+    if (n == 0)
+    {
+        printf("\nThere are no repeating elements in the array.");
+        return 0;
+    }
+    output(B, n);
+
+
+    return 0;
+}
