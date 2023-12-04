@@ -1,22 +1,104 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#define lmax 200
-int main()
-{
-int n, i;
-float x, a, h, R[lmax];
-printf("Daria Dusheiko, IVT, BIV237, v374\n");
-printf("Laboratory work #1\n");
-printf("\n");
-printf("Task #1.4\n");
-do
-{
-printf("Enter the array length from 1 to %d: ", lmax);
-scanf("%d", &n);
+
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <math.h> 
+#define lmax 200 
+ 
+int main() 
+{ 
+    int n, i; 
+    float x, a, h, R[lmax]; 
+ 
+    printf("Daria Dusheiko, IVT, BIV237, v374\n"); 
+    printf("Laboratory work #1\n"); 
+    printf("\n"); 
+    printf("Task #1.4\n"); 
+ 
+    do 
+    { 
+        printf("Enter the array length from 1 to %d: ", lmax); 
+        scanf("%d", &n); 
+    } 
+    while (n <= 0 || n > lmax); 
+ 
+    printf("Enter x, h, a: "); 
+    scanf("%f %f %f", &x, &h, &a); 
+ 
+    for (int i = 1; i <= n; i++) 
+    { 
+        R[i] = 0.3 * cos(2 * a * x - i * i * h); 
+    } 
+    printf("\n"); 
+ 
+    printf("Array R of %d elements:\n", n); 
+    for (int i = 1; i <= n; i++) 
+    { 
+        printf("%f ", R[i]); 
+    } 
+ 
+    printf("\n"); 
+    printf("\n"); 
+    printf("Task #2.6\n"); 
+ 
+    int k = 0; 
+    for (int i = 1; i <= n; i++) 
+    { 
+        if (R[i] < 0.0) 
+            k = i; 
+    } 
+    int e = 0; 
+    if (k == 0) 
+        printf("There are no negative numbers\n"); 
+    else 
+    { 
+        for (int i = 1; i < k; i++) 
+        { 
+            if (R[i] <= 0.0) 
+            { 
+                e += 1; 
+                R[e] = R[i]; 
+            } 
+        } 
+ 
+        for (int i = k; i <= n; i++) 
+        { 
+            e += 1; 
+            R[e] = R[i]; 
+        } 
+        printf("Array R of %d elements:\n", e); 
+ 
+        for (int i = 1; i <= e; i++) 
+        { 
+            printf("%f ", R[i]); 
+        } 
+    } 
+ 
+    printf("\n"); 
+    printf("\n"); 
+    printf("Task #3.5\n"); 
+    int n1 = e; 
+ 
+    float kol = 0; 
+    float sum = 0; 
+    for (int i = 1; i <= n1; i++) 
+    { 
+        if (R[i] >= 0) 
+        { 
+            kol = 1 + kol; 
+            sum = R[i] + sum; 
+        } 
+        else 
+            break; 
+    } 
+    if (kol == 0) 
+    { 
+        printf("There is no average value\n"); 
+    } 
+    else 
+    { 
+        kol = sum / kol; 
+        printf("Average value: %f", kol); 
+    } 
+ 
+    return 0; 
 }
-while (n <= 0 || n > lmax);
-printf("Enter x, h, a: ");
-scanf("%f %f %f", &x, &h, &a);
-for (int i = 1; i <= n; i++)
-{
